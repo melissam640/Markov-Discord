@@ -71,6 +71,8 @@ text = open_and_read_file(filenames)
 # Get a Markov chain
 chains = make_chains(text)
 
+#### DISCORD CODE ######
+
 intents = discord.Intents.default()
 intents.message_content = True
 
@@ -84,8 +86,9 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
-
-    # TODO: replace this with your code
-
+    
+    await message.channel.send(make_text(chains))
+#    if message.content.startswith('$hello'):
+#       await message.channel.send('Hello!')
 
 client.run(os.environ['DISCORD_TOKEN'])
